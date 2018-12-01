@@ -15,6 +15,7 @@ import com.garner.iceroad.domain.Shipment.Unit;
 
 @Service
 public class ScheduleService {
+	private static final int SLOT_PER_HOUR = 7;
 	public static final DateTime FEV_01 = new DateTime(2019, 02, 01, 8, 0, 0);
 	public static final DateTime FEV_16 = new DateTime(2019, 02, 16, 0, 0, 0);
 
@@ -40,11 +41,11 @@ public class ScheduleService {
 			shipments.add(shipment);
 		});
 		
-		HandleSchecule handle = new HandleSchecule(ScheduleService.FEV_01,15,8);
+		HandleSchecule handle = new HandleSchecule(ScheduleService.FEV_01,15,SLOT_PER_HOUR);
 		schedule(handle, less15ton, result);
 	
 		theOthers.addAll(less15ton);
-		handle = new HandleSchecule(ScheduleService.FEV_16,45,8);
+		handle = new HandleSchecule(ScheduleService.FEV_16,45,SLOT_PER_HOUR);
 		schedule(handle, theOthers, result);
 		
 		return result;
