@@ -1,0 +1,14 @@
+-------------------------------------------------------------------------------
+Test set: com.garner.iceroad.routes.RouteTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.139 sec <<< FAILURE! - in com.garner.iceroad.routes.RouteTest
+initializationError(com.garner.iceroad.routes.RouteTest)  Time elapsed: 0.008 sec  <<< ERROR!
+org.mockito.exceptions.base.MockitoException: 
+
+
+No tests found in RouteTest
+Haven't you forgot @Test annotation?
+
+Caused by: java.lang.reflect.InvocationTargetException
+Caused by: org.junit.runners.model.InitializationError
+
