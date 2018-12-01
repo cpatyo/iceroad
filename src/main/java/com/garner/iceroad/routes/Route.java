@@ -15,12 +15,16 @@ import com.garner.iceroad.service.ScheduleService;
 
 @Component
 public class Route extends RouteBuilder {
+	private static final String OUTPUT_FILE_URI = "file:///tmp/iceroad/out";
+	private static final String INPUT_FILE_URI = "file:///tmp/iceroad/in?delete=true&delay=10000";
+	private static final String OUTPUT_FORMATS = "%s,%s,%s";
+	final SimpleDateFormat DATE_FORMAT=new SimpleDateFormat("YYYY-MM-dd, HH:mm");
 	@Autowired
 	ScheduleService service;
 
 	@Override
 	public void configure() throws Exception {
-		final SimpleDateFormat f=new SimpleDateFormat("YYYY-MM-dd, HH:mm");
+		
 		CsvDataFormat csvIn = new CsvDataFormat();
 		csvIn.setDelimiter(",");
 		csvIn.setIgnoreEmptyLines(true);
@@ -30,7 +34,7 @@ public class Route extends RouteBuilder {
 		csvOut.setDelimiter(",");
 		csvOut.setHeader(Arrays.asList(new String[] {"day","hour","slot","id"}));
 		
-		from("file:///tmp/iceroad/in?delete=true&delay=10000")
+		from(INPUT_FILE_URI)
 			.unmarshal(csvIn)
 			.process(exchange-> {
 				List<List<String>> list=(List<List<String>>) exchange.getIn().getBody();
@@ -45,13 +49,16 @@ public class Route extends RouteBuilder {
 				 exchange.getOut().setBody(
 					 service.schedule(list).stream()
 					 					   .map(schedule->String.format(
-					 							   "%s,%s,%s", 
-					 							   f.format(schedule.getSlot().getDate()),schedule.getSlot().getSloteNumber(), schedule.getShipment().getId())
+					 							   OUTPUT_FORMATS, 
+					 							   DATE_FORMAT.format(schedule.getSlot().getDate()),
+					 							   			schedule.getSlot().getSloteNumber(), 
+					 							   			schedule.getShipment().getId()
+					 							   )
 					 						)
 					 					   .collect(Collectors.toList())
 				);
 			})
 			.marshal(csvOut)
-			.to("file:///tmp/iceroad/out");
+			.to(OUTPUT_FILE_URI);
 	}
 }

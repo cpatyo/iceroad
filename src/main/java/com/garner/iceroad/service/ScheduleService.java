@@ -24,19 +24,23 @@ public class ScheduleService {
 
 		TreeSet<Shipment> less15ton = new TreeSet<Shipment>((s0, s1) -> {
 			int compPriority = s0.getPriority().compareTo(s1.getPriority());
-			if (compPriority != 0)
+			if (compPriority != 0) {
 				return compPriority;
-			if (s0.getWeightInKg() == s1.getWeightInKg())
+			}
+			if (s0.getWeightInKg() == s1.getWeightInKg()) {
 				return 0;
+			}
 			return s0.getWeightInKg() > s1.getWeightInKg() ? 1 : -1;
 		});
 
 		TreeSet<Shipment> theOthers = new TreeSet<Shipment>((s0, s1) -> {
 			int compPriority = s0.getPriority().compareTo(s1.getPriority());
-			if (compPriority != 0)
+			if (compPriority != 0) {
 				return compPriority;
-			if (s0.getWeightInKg() == s1.getWeightInKg())
+			}
+			if (s0.getWeightInKg() == s1.getWeightInKg()) {
 				return 0;
+			}
 			return s0.getWeightInKg() > s1.getWeightInKg() ? -1 : 1;
 		});
 

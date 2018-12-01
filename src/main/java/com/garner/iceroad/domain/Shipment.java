@@ -1,5 +1,6 @@
 package com.garner.iceroad.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
@@ -14,14 +15,13 @@ public class Shipment {
 		return unit.rate*weight;
 	}
 	
+	@AllArgsConstructor
 	public enum Unit {
 		ton(1000),
 		lbs(0.453592),
 		kg(1);
 		private double rate;
-		Unit(double rate) {
-			this.rate = rate;
-		}
+	
 	}
 
 
