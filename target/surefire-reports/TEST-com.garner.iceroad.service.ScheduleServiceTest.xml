@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.garner.iceroad.service.ScheduleServiceTest" time="0.022" tests="9" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.garner.iceroad.service.ScheduleServiceTest" time="0.019" tests="9" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_144\jre\bin"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="C:\Java\Workspaces\vitai\IceRoad"/>
+    <property name="user.dir" value="C:\Users\cesar.patricio\git\iceroad"/>
     <property name="java.runtime.version" value="1.8.0_144-b01"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_144\jre\lib\endorsed"/>
@@ -62,12 +62,12 @@
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
   <testcase name="scheduleEmpty_OK" classname="com.garner.iceroad.service.ScheduleServiceTest" time="0"/>
-  <testcase name="create1Shipment_Ok" classname="com.garner.iceroad.service.ScheduleServiceTest" time="0.002"/>
-  <testcase name="schedule3Greather15Ton_OK" classname="com.garner.iceroad.service.ScheduleServiceTest" time="0.008"/>
+  <testcase name="create1Shipment_Ok" classname="com.garner.iceroad.service.ScheduleServiceTest" time="0.001"/>
+  <testcase name="schedule3Greather15Ton_OK" classname="com.garner.iceroad.service.ScheduleServiceTest" time="0.006"/>
   <testcase name="create1ShipmentWithoutPriority_Ok" classname="com.garner.iceroad.service.ScheduleServiceTest" time="0"/>
   <testcase name="schedule6MixedTon_OK" classname="com.garner.iceroad.service.ScheduleServiceTest" time="0.003"/>
-  <testcase name="schedule15TonBefore15Fev_OK" classname="com.garner.iceroad.service.ScheduleServiceTest" time="0.003"/>
+  <testcase name="schedule15TonBefore15Fev_OK" classname="com.garner.iceroad.service.ScheduleServiceTest" time="0.002"/>
   <testcase name="schedule3Less15Ton_OK" classname="com.garner.iceroad.service.ScheduleServiceTest" time="0.001"/>
   <testcase name="schedule1Less15Ton_OK" classname="com.garner.iceroad.service.ScheduleServiceTest" time="0.002"/>
-  <testcase name="schedule1Greather15Ton_OK" classname="com.garner.iceroad.service.ScheduleServiceTest" time="0.001"/>
+  <testcase name="schedule1Greather15Ton_OK" classname="com.garner.iceroad.service.ScheduleServiceTest" time="0"/>
 </testsuite>

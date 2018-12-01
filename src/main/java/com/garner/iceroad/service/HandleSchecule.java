@@ -14,7 +14,7 @@ public class HandleSchecule {
 	public HandleSchecule(DateTime startDate, int days, int slotPerHour) {
 		this.startDate = new DateTime(startDate);
 		this.currentDate = new DateTime(startDate);
-		this.endDate = this.startDate.plusDays(days);
+		this.endDate = this.startDate.plusDays(days).withHourOfDay(0).withMinuteOfHour(0).withSecondOfMinute(0);
 		this.slotPerHour = slotPerHour;
 	}
 	public Slot getNext() {

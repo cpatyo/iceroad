@@ -15,7 +15,7 @@ import com.garner.iceroad.domain.Shipment.Unit;
 
 @Service
 public class ScheduleService {
-	public static final DateTime FEV_01 = new DateTime(2019, 02, 01, 0, 0, 0);
+	public static final DateTime FEV_01 = new DateTime(2019, 02, 01, 8, 0, 0);
 	public static final DateTime FEV_16 = new DateTime(2019, 02, 16, 0, 0, 0);
 
 	public List<Scheduler> schedule(List<Shipment> list) {

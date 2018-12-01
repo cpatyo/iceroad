@@ -40,7 +40,7 @@ public class HandleScheduleTest {
 	@Test
 	public void hasNextFalse_OK() {
 		HandleSchecule handle = new HandleSchecule(ScheduleService.FEV_01, 1, 1);
-		for(int i=0;i<24;i++)handle.getNext();
+		for(int i=0;i<16;i++)handle.getNext();
 		assertEquals(handle.hasNext(), false);
 	}
 	@Test(expected=OverflowException.class)
@@ -63,7 +63,7 @@ public class HandleScheduleTest {
 	private void testSlots(int slotPerHour) {
 		List<Slot> list = new ArrayList<Slot>();
 		HandleSchecule handle = new HandleSchecule(ScheduleService.FEV_01, 1, slotPerHour);
-		for(int i=0;i<24*slotPerHour;i++) {
+		for(int i=0;i<16*slotPerHour;i++) {
 			Slot slot = handle.getNext();
 			list.add(slot); 
 		}
