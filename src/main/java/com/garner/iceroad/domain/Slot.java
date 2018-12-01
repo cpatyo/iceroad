@@ -6,10 +6,11 @@ import lombok.Data;
 
 @Data
 public class Slot {
+	private Date date;
+	private int sloteNumber;
+	
 	public Slot(Date date, int sloteNumber) {
 		this.date = date;
 		this.sloteNumber = sloteNumber;
 	}
-	private Date date;
-	private int sloteNumber;
 }

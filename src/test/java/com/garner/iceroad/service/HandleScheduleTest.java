@@ -1,6 +1,7 @@
 package com.garner.iceroad.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,9 +15,6 @@ import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.garner.iceroad.domain.Slot;
-import com.garner.iceroad.service.HandleSchecule;
-import com.garner.iceroad.service.OverflowException;
-import com.garner.iceroad.service.ScheduleService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class HandleScheduleTest {
@@ -26,23 +24,50 @@ public class HandleScheduleTest {
 		HandleSchecule handle = new HandleSchecule( ScheduleService.FEV_01, 15, 1);
 		assertEquals(handle.getEndDate(), endDate);
 	}
+	
+	@Test
+	public void qtdSlotsFev16_OK() {
+		HandleSchecule handle = new HandleSchecule(ScheduleService.FEV_16, 1, ScheduleService.SLOT_PER_HOUR);
+		int i=0;
+		while(handle.hasNext()) {
+			handle.getNext();
+			i++;
+		}
+		System.out.println(i);
+		assertTrue(i==24*7);
+	}
+	
+	@Test
+	public void qtdSlotsFev01_OK() {
+		HandleSchecule handle = new HandleSchecule(ScheduleService.FEV_01, 1,  ScheduleService.SLOT_PER_HOUR);
+		int i=0;
+		while(handle.hasNext()) {
+			handle.getNext();
+			i++;
+		}
+		assertTrue(i==16*7);
+	}
+	
 	@Test
 	public void endDate45ddTest_OK() {
 		DateTime endDate = new DateTime(2019, 04,02, 0, 0, 0);
 		HandleSchecule handle = new HandleSchecule(ScheduleService.FEV_16, 45, 1);
 		assertEquals(handle.getEndDate(), endDate);
 	}
+	
 	@Test
 	public void hasNextTrue_OK() {
 		HandleSchecule handle = new HandleSchecule(ScheduleService.FEV_01, 1, 1);
 		assertEquals(handle.hasNext(), true);
 	}
+	
 	@Test
 	public void hasNextFalse_OK() {
 		HandleSchecule handle = new HandleSchecule(ScheduleService.FEV_01, 1, 1);
 		for(int i=0;i<16;i++)handle.getNext();
 		assertEquals(handle.hasNext(), false);
 	}
+	
 	@Test(expected=OverflowException.class)
 	public void nextOverflow_throwException() {
 		HandleSchecule handle = new HandleSchecule(ScheduleService.FEV_01, 1, 1);
@@ -50,16 +75,19 @@ public class HandleScheduleTest {
 		handle.getNext();
 		assertEquals(handle.hasNext(), false);
 	}
+	
 	@Test
 	public void next1SlotPerHour_Ok() {
 		int slotPerHour=1;
 		testSlots(slotPerHour);
 	}
+	
 	@Test
 	public void next8SlotPerHour_Ok() {
 		int slotPerHour=8;
 		testSlots(slotPerHour);
 	}
+	
 	private void testSlots(int slotPerHour) {
 		List<Slot> list = new ArrayList<Slot>();
 		HandleSchecule handle = new HandleSchecule(ScheduleService.FEV_01, 1, slotPerHour);

@@ -57,18 +57,21 @@ public class ScheduleServiceTest {
 		expected.setWeight(15.5);
 		assertEquals(shipment,expected);
 	}
+	
 	@Test
 	public void create1ShipmentWithoutPriority_Ok() {
 		String[] line= {"47","wet bulk freight","22","ton",""};
 		Shipment shipment = service.createShipment(Arrays.asList(line));
 		assertTrue(shipment.getPriority()==3);
 	}
+	
 	@Test
 	public void scheduleEmpty_OK() {
 		List<Scheduler> empty = service.schedule(Collections.emptyList());
 		assertTrue(empty.isEmpty());
 
 	}
+	
 	@Test
 	public void schedule1Greather15Ton_OK() {
 		List<Shipment> shipments = getShipments().stream().filter(shipment->shipment.getId().equals("1")).collect(Collectors.toList());
@@ -87,6 +90,7 @@ public class ScheduleServiceTest {
 		Scheduler excpected = new Scheduler(slot,shipments.get(0));
 		assertEquals(result.get(0), excpected);
 	}
+	
 	@Test
 	public void schedule3Less15Ton_OK() {
 		List<String> ids= Arrays.asList(new String[]{"8","89","64"});
@@ -94,6 +98,7 @@ public class ScheduleServiceTest {
 		List<String> result = service.schedule(shipments).stream().map(schedule->schedule.getShipment().getId()).collect(Collectors.toList());
 		assertTrue(checkOrder(result,new String[] {"64", "89","8"}));
 	}
+	
 	@Test
 	public void schedule3Greather15Ton_OK() {
 		List<String> ids= Arrays.asList(new String[]{"1","1832","3827"});
@@ -101,6 +106,7 @@ public class ScheduleServiceTest {
 		List<String> result = service.schedule(shipments).stream().map(schedule->schedule.getShipment().getId()).collect(Collectors.toList());
 		assertTrue(checkOrder(result,new String[] {"1832", "1", "3827"}));
 	}
+	
 	@Test
 	public void schedule6MixedTon_OK() {
 		List<String> ids= Arrays.asList(new String[]{"1","1832","3827","8","89","64"});
@@ -108,6 +114,7 @@ public class ScheduleServiceTest {
 		List<String> result = service.schedule(shipments).stream().map(schedule->schedule.getShipment().getId()).collect(Collectors.toList());
 		assertTrue(checkOrder(result,new String[] {"64", "89", "8", "1832", "1", "3827"}));
 	}
+	
 	@Test
 	public void schedule15TonBefore15Fev_OK() {
 		List<Shipment> shipments = getShipments();
@@ -126,11 +133,9 @@ public class ScheduleServiceTest {
 		for(int i=0;i<order.length;i++) if(!ids.get(i).equals(order[i])) return false;
 		return true;
 	}
+	
 	private List<Shipment> getShipments() {
 		List<List<String>> list = Stream.of(lines).map(line->Arrays.asList(line.trim().split(","))).collect(Collectors.toList());
 		return list.stream().map(line->service.createShipment(line)).collect(Collectors.toList());
 	}
-
-		
-
 }

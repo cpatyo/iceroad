@@ -17,7 +17,6 @@ import com.garner.iceroad.service.ScheduleService;
 public class Route extends RouteBuilder {
 	@Autowired
 	ScheduleService service;
-	
 
 	@Override
 	public void configure() throws Exception {
@@ -45,22 +44,14 @@ public class Route extends RouteBuilder {
 				 List<Shipment> list=(List<Shipment>) exchange.getIn().getBody();
 				 exchange.getOut().setBody(
 					 service.schedule(list).stream()
-					 	.map(schedule->String.format("%s,%s,%s", f.format(schedule.getSlot().getDate()),schedule.getSlot().getSloteNumber(), schedule.getShipment().getId()))
-					 	.collect(Collectors.toList())
+					 					   .map(schedule->String.format(
+					 							   "%s,%s,%s", 
+					 							   f.format(schedule.getSlot().getDate()),schedule.getSlot().getSloteNumber(), schedule.getShipment().getId())
+					 						)
+					 					   .collect(Collectors.toList())
 				);
 			})
 			.marshal(csvOut)
-			
-			.to("file:///tmp/iceroad/out")
-			
-		;
-
-		;
-		
+			.to("file:///tmp/iceroad/out");
 	}
-
-
-
-
-
 }
